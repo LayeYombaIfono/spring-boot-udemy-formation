@@ -20,7 +20,11 @@ class BackendApplicationTests {
 	 */
     @Test
 	public void testCreateProduit(){
-		Produit produit2 = new Produit("Souris sans file",2500,new Date() );
+		Produit produit2 = new Produit();
+		produit2.setNomProduit("Ecran LENOVO");
+		produit2.setPrixProduit(42000);
+		produit2.setDateCreation(new Date());
+
 		produitRepository.save(produit2);
 	}
 
@@ -30,7 +34,7 @@ class BackendApplicationTests {
 	 */
 	@Test
 	public void testFindProduit(){
-		Produit p = produitRepository.findById(1L).get();
+		Produit p = produitRepository.findById(9L).get();
 		System.out.println(p.toString());
 	}
 
@@ -39,8 +43,9 @@ class BackendApplicationTests {
 	 */
 	@Test
 	public void testUpdateProduit(){
-		Produit produit = produitRepository.findById(2l).get();
-		produit.setNomProduit("Ordinateur Hp");
+		Produit produit = produitRepository.findById(4L).get();
+		produit.setNomProduit("Imprimante Hp");
+		produit.setPrixProduit(1500000);
 		produitRepository.save(produit);
 		System.out.println("Le produit a ete mise a jour "+produit.getNomProduit());
 	}
@@ -50,7 +55,7 @@ class BackendApplicationTests {
 	 */
 	@Test
 	public void testDeleteProduit(){
-		produitRepository.deleteById(3L);
+		produitRepository.deleteById(7L);
 	}
 
 	/**
@@ -63,7 +68,29 @@ class BackendApplicationTests {
 		for (Produit produit : produits){
 			System.out.println(produit.getNomProduit());
 		}
+	}
 
+	/**
+	 * Trouver un produit par son nom
+	 */
+	@Test
+	public void findProduitByName(){
+		List<Produit> produit = produitRepository.findByNomProduit("Imprimante Hp");
+		for (Produit p : produit){
+			System.out.println("Le produit: "+p);
+		}
+	}
+
+	/**
+	 * Trouver un produit qui containe un nom
+	 *
+	 */
+	@Test
+	public void findProduitContains(){
+		List<Produit> produits = produitRepository.findByNomProduitContains("Hp");
+		for (Produit produit : produits){
+			System.out.println(produit.getNomProduit());
+		}
 	}
 
 	@Test

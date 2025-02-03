@@ -1,12 +1,15 @@
 package com.hamilatech.backend.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-
 public class Produit {
 
     @Id
@@ -22,40 +25,9 @@ public class Produit {
     @Column
     private Date dateCreation;
 
-    public Produit() {
-        super();
-    }
+    @ManyToOne
+    private Categorie categorie;
 
-    public Produit(String nomProduit, double prixProduit, Date dateCreation) {
-        this.nomProduit = nomProduit;
-        this.prixProduit = prixProduit;
-        this.dateCreation = dateCreation;
-    }
-
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public double getPrixProduit() {
-        return prixProduit;
-    }
-
-    public void setPrixProduit(double prixProduit) {
-        this.prixProduit = prixProduit;
-    }
-
-    public String getNomProduit() {
-        return nomProduit;
-    }
-
-    public void setNomProduit(String nomProduit) {
-        this.nomProduit = nomProduit;
-    }
 
     @Override
     public String toString() {
