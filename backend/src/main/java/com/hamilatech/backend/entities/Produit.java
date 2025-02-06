@@ -6,10 +6,13 @@ import lombok.*;
 
 import java.util.Date;
 
+
+@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Table(name = "table_produit")
 public class Produit {
 
     @Id
@@ -22,7 +25,7 @@ public class Produit {
     @Column
     private  double prixProduit;
 
-    @Column
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
 
     @ManyToOne
@@ -34,4 +37,6 @@ public class Produit {
         return "Produit :" +":" + id +", nomProduit:'" + nomProduit + ", prixProduit:" + prixProduit + ", dateCreation:" + dateCreation;
 
     }
+
+
 }

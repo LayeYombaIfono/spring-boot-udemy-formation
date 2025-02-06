@@ -8,7 +8,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
+@Table(name = "table_categorie")
 public class Categorie {
 
     @Id

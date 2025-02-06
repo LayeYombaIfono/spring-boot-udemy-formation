@@ -1,6 +1,8 @@
 package com.hamilatech.backend;
 
+import com.hamilatech.backend.entities.Categorie;
 import com.hamilatech.backend.entities.Produit;
+import com.hamilatech.backend.repository.CategoryRepository;
 import com.hamilatech.backend.repository.ProduitRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,29 +15,32 @@ import java.util.List;
 class BackendApplicationTests {
 
 	@Autowired
-	private  ProduitRepository produitRepository;
+	public   ProduitRepository produitRepository;
+
+	@Autowired
+	public CategoryRepository categoryRepository;
 
 	/**
 	 * Enregistrer un produit
 	 */
-    @Test
+	@Test
 	public void testCreateProduit(){
-		Produit produit2 = new Produit();
-		produit2.setNomProduit("Ecran LENOVO");
-		produit2.setPrixProduit(42000);
-		produit2.setDateCreation(new Date());
+		Produit produit = new Produit();
+		produit.setNomProduit("Projecteur");
+		produit.setPrixProduit(10000);
+		produit.setDateCreation(new Date());
 
-		produitRepository.save(produit2);
+		produitRepository.save(produit);
 	}
-
 
 	/**
 	 * Consulter un produit par son id
 	 */
 	@Test
 	public void testFindProduit(){
-		Produit p = produitRepository.findById(9L).get();
-		System.out.println(p.toString());
+		Produit p = produitRepository.findById(9L)
+				.orElseThrow(()-> new RuntimeException("Le produit avec l'ID 4 n'a pas été trouvé"));
+		System.out.println(p);
 	}
 
 	/**
@@ -43,9 +48,10 @@ class BackendApplicationTests {
 	 */
 	@Test
 	public void testUpdateProduit(){
-		Produit produit = produitRepository.findById(4L).get();
-		produit.setNomProduit("Imprimante Hp");
-		produit.setPrixProduit(1500000);
+		Produit produit = produitRepository.findById(9L)
+						.orElseThrow(()-> new RuntimeException("Le produit avec l'ID 7 n'a pas été trouvé"));
+		produit.setNomProduit("Imprimante");
+		produit.setPrixProduit(80000.00);
 		produitRepository.save(produit);
 		System.out.println("Le produit a ete mise a jour "+produit.getNomProduit());
 	}
@@ -55,7 +61,7 @@ class BackendApplicationTests {
 	 */
 	@Test
 	public void testDeleteProduit(){
-		produitRepository.deleteById(7L);
+		produitRepository.deleteById(8L);
 	}
 
 	/**
@@ -66,7 +72,7 @@ class BackendApplicationTests {
 		List<Produit>produits = produitRepository.findAll();
 
 		for (Produit produit : produits){
-			System.out.println(produit.getNomProduit());
+			System.out.println("Nom: "+produit.getNomProduit()+"\nPrix: "+produit.getPrixProduit());
 		}
 	}
 
@@ -75,7 +81,7 @@ class BackendApplicationTests {
 	 */
 	@Test
 	public void findProduitByName(){
-		List<Produit> produit = produitRepository.findByNomProduit("Imprimante Hp");
+		List<Produit> produit = produitRepository.findByNomProduit("Vidéo projecteur");
 		for (Produit p : produit){
 			System.out.println("Le produit: "+p);
 		}
@@ -87,10 +93,50 @@ class BackendApplicationTests {
 	 */
 	@Test
 	public void findProduitContains(){
-		List<Produit> produits = produitRepository.findByNomProduitContains("Hp");
+		List<Produit> produits = produitRepository.findByNomProduitContains("Or");
 		for (Produit produit : produits){
 			System.out.println(produit.getNomProduit());
 		}
+	}
+
+//	Test requete @Query
+	@Test
+	public void testFindByNomPrix(){
+		List<Produit> produits = produitRepository.findByNomPrix(
+				"Ordinateur Dell",
+				1500.23
+		);
+		for (Produit produit : produits){
+			System.out.println("Le produit : "+ produit.getNomProduit()+"\nPrix: "+produit.getPrixProduit());
+
+		}
+	}
+
+	/**
+	 * Opérations CRUD pour la catégorie
+	 */
+
+	//	Enregistrer une catégorie
+	@Test
+	public void testAddCategory(){
+		Categorie categorie = new Categorie();
+		categorie.setNomCat("Projecteur");
+		categorie.setDescriptionCat("Vidéo projecteur Epson");
+
+		categoryRepository.save(categorie);
+	}
+
+//	Test pour trouver des produits par categorie
+	@Test
+	public void findByCategoryProduct(){
+		Categorie cat = new Categorie();
+		cat.setIdCat(7L);
+		List<Produit> caterigorys = produitRepository.findByCategory(cat);
+
+		for (Produit category : caterigorys){
+			System.out.println("Liste de produit de categorie 1 : " + category.getNomProduit());
+		}
+
 	}
 
 	@Test
