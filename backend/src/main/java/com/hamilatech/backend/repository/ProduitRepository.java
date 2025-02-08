@@ -2,7 +2,6 @@ package com.hamilatech.backend.repository;
 
 import com.hamilatech.backend.entities.Categorie;
 import com.hamilatech.backend.entities.Produit;
-import jdk.jfr.Percentage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,10 +26,22 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 
 
 //    Trouver le produit par sa catégorie
-    @Query("select p from Produit p where p.categorie = ?1")
-    List<Produit> findByCategorie(Categorie categorie);
+//    @Query("select p from Produit p where p.categorie = ?1")
+//    List<Produit> findByCategorie(Categorie categorie);
 
 //    Trouver des produits par categorie
     @Query("select p from Produit p where p.categorie = ?1")
     List<Produit> findByCategory(Categorie categorie);
+
+//    Trouver le produit par son id
+//    List<Produit> findByCategoryIdCat(Long id);
+
+//    Methode pour trier des donnees
+    List<Produit> findByOrderByNomProduitAsc();
+
+//Trier des produits par odre croissant et les prix par ordre decoissant avec JPA Query
+    @Query("select p from Produit p order by p.nomProduit ASC, prixProduit DESC")
+    List<Produit>trierProduitsNomPrix();
+
+
 }

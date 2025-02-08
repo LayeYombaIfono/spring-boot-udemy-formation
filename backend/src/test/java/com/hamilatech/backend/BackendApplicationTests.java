@@ -131,17 +131,44 @@ class BackendApplicationTests {
 	public void findByCategoryProduct(){
 		Categorie cat = new Categorie();
 		cat.setIdCat(7L);
-		List<Produit> caterigorys = produitRepository.findByCategory(cat);
+		List<Produit> categorys = produitRepository.findByCategory(cat);
 
-		for (Produit category : caterigorys){
+		for (Produit category : categorys){
 			System.out.println("Liste de produit de categorie 1 : " + category.getNomProduit());
 		}
 
 	}
 
-	@Test
-	void contextLoads() {
+//	Test pour trouver une categorie par id
+//	@Test
+//	public  void testFindByCategoryByIcat(){
+//
+//		List<Produit> produitCategory = produitRepository.findByCategoryIdCat(1L);
+//
+//		for (Produit category : produitCategory){
+//			System.out.println(category);
+//		}
+//	}
 
+//	Test pour trier des produits par ordre croissant
+	@Test
+	public void finByProduitAsc(){
+		List<Produit> produits = produitRepository.findByOrderByNomProduitAsc();
+
+		for (Produit produit : produits){
+			System.out.println(produit.getNomProduit());
+		}
+	}
+
+
+//Trier des produits par odre croissant et les prix par ordre decoissant avec JPA Query
+	@Test
+	public void trierProduitNomPrix(){
+		List<Produit> produits = produitRepository.trierProduitsNomPrix();
+
+		for (Produit produit : produits){
+			System.out.println("Nom -> "+produit.getNomProduit() +" \nprix -> " +produit.getPrixProduit() );
+		}
 	}
 
 }
