@@ -32,11 +32,4 @@ public class Produit {
     private Categorie categorie;
 
 
-    @Override
-    public String toString() {
-        return "Produit :" +":" + id +", nomProduit:'" + nomProduit + ", prixProduit:" + prixProduit + ", dateCreation:" + dateCreation;
-
-    }
-
-
 }

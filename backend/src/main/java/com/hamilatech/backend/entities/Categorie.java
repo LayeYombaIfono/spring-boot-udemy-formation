@@ -1,5 +1,6 @@
 package com.hamilatech.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,7 +28,8 @@ public class Categorie {
 
 
     @OneToMany(mappedBy = "categorie")
-    List<Produit> produits;
+    @JsonIgnore
+   private List<Produit> produits;
 
 
 
