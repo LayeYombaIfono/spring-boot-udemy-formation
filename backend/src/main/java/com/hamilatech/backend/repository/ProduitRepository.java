@@ -12,13 +12,8 @@ import java.util.List;
 @Repository
 public interface ProduitRepository extends JpaRepository<Produit, Long> {
 
-    List<Produit> findByNomProduit(String nom);
-    List<Produit> findByNomProduitContains(String nom);
-
-//  Ecrire les requetes @Query  JPA QUERY
-//    @Query("select p from Produit p where p.nomProduit like %?1 and p.prixProduit > ?2")
-//    List<Produit> findByNomPrix(String nom, Double prix);
-
+   List<Produit> findByNomProduit(String nom);
+   List<Produit> findByNomProduitContains(String nom);
 
 //    Trouver le produit par son nom et son prix
     @Query("select p from Produit p where p.nomProduit like %:nom and p.prixProduit > :prix")
@@ -33,8 +28,6 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     @Query("select p from Produit p where p.categorie = ?1")
     List<Produit> findByCategory(Categorie categorie);
 
-//    Trouver le produit par son id
-//    List<Produit> findByCategoryIdCat(Long id);
 
 //    Methode pour trier des donnees
     List<Produit> findByOrderByNomProduitAsc();
@@ -43,5 +36,5 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     @Query("select p from Produit p order by p.nomProduit ASC, prixProduit DESC")
     List<Produit>trierProduitsNomPrix();
 
-
+//    List<Produit> findByCategoryByIdCat(Long id);
 }
