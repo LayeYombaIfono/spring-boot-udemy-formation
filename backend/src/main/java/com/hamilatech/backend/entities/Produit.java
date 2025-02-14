@@ -4,14 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @Entity
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "table_produit")
 public class Produit {
 
@@ -19,17 +15,67 @@ public class Produit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true, length = 150)
     private String nomProduit;
 
-    @Column
+    @Column(nullable = false)
     private  double prixProduit;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreation;
+   @Column
+    private LocalDate dateCreation;
 
     @ManyToOne
     private Categorie categorie;
 
 
+    public Produit() {
+        super();
+    }
+
+    public Produit(String nomProduit, double prixProduit, LocalDate dateCreation, Categorie categorie) {
+        this.nomProduit = nomProduit;
+        this.prixProduit = prixProduit;
+        this.dateCreation = dateCreation;
+        this.categorie = categorie;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNomProduit() {
+        return nomProduit;
+    }
+
+    public void setNomProduit(String nomProduit) {
+        this.nomProduit = nomProduit;
+    }
+
+    public double getPrixProduit() {
+        return prixProduit;
+    }
+
+    public void setPrixProduit(double prixProduit) {
+        this.prixProduit = prixProduit;
+    }
+
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
 }

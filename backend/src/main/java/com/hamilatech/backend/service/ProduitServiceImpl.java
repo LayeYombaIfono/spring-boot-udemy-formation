@@ -2,7 +2,9 @@ package com.hamilatech.backend.service;
 
 import com.hamilatech.backend.entities.Categorie;
 import com.hamilatech.backend.entities.Produit;
+import com.hamilatech.backend.exception.ProductRegistrationException;
 import com.hamilatech.backend.repository.ProduitRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,24 +13,33 @@ import java.util.List;
 /**
  * Classe qui represent les méthodes CRUD.
  */
+@AllArgsConstructor
 @Service
 public class ProduitServiceImpl implements ProduitService{
 
     @Autowired
-    private final ProduitRepository produitRepository;
-
-    public ProduitServiceImpl(ProduitRepository produitRepository) {
-        this.produitRepository = produitRepository;
-    }
+    private  ProduitRepository produitRepository;
 
     /**
      * Méthode pour enregtré un produit
      * @param produit Le produit à enregistré
-     * @return Le produit
      */
     @Override
-    public Produit saveProduit(Produit produit) {
-        return produitRepository.save(produit);
+    public void saveProduit(Produit produit) {
+        try {
+            boolean productExist = !produitRepository.findByNomProduit(produit.getNomProduit()).isEmpty();
+
+            if (productExist){
+               throw new ProductRegistrationException("Le produit " + produit.getNomProduit() + "exit dejà.");
+            }
+
+            produitRepository.save(produit);
+
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "Erreur lors de l'enregistrement du produit : " + e.getMessage()
+            );
+        }
     }
 
 

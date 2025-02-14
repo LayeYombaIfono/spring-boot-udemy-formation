@@ -2,23 +2,28 @@ package com.hamilatech.backend.controller;
 
 import com.hamilatech.backend.entities.Produit;
 import com.hamilatech.backend.service.ProduitService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
+@AllArgsConstructor
 @RestController
-@RequestMapping("/products")
-@CrossOrigin
+@RequestMapping(path = "/products")
 public class ProduitRestController {
 
     @Autowired
     ProduitService produitService;
 
 //    Méthode pour créer un produit
-@RequestMapping(method = RequestMethod.POST)
-public Produit createProduit(@RequestBody Produit produit){
-    return produitService.saveProduit(produit);
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+@PostMapping(consumes = APPLICATION_JSON_VALUE)
+public void createProduit(@RequestBody Produit produit){
+     this.produitService.saveProduit(produit);
 }
 
 //   Méthode pour récuperer tout les produit

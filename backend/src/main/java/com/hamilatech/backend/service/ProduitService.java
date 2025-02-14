@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProduitService {
 
-    Produit saveProduit(Produit produit);
+    void saveProduit(Produit produit);
     Produit updateProduit(Produit produit);
     void deleteProduit(Produit produit);
     void deleteProduitById(Long id);
