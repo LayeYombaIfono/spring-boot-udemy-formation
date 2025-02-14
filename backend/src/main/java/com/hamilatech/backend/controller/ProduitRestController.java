@@ -20,14 +20,15 @@ public class ProduitRestController {
     ProduitService produitService;
 
 //    Méthode pour créer un produit
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
+@ResponseStatus(value = HttpStatus.ACCEPTED)
 @PostMapping(consumes = APPLICATION_JSON_VALUE)
 public void createProduit(@RequestBody Produit produit){
      this.produitService.saveProduit(produit);
 }
 
+
 //   Méthode pour récuperer tout les produit
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping(path ="/all" , produces = APPLICATION_JSON_VALUE)
    public List<Produit> getAllProduits(){
         return produitService.getAllProduits();
     }

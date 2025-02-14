@@ -44,6 +44,30 @@ public class ProduitServiceImpl implements ProduitService{
 
 
     /**
+     * Méthode pour recupéré tous les produits
+     * @return Les produits
+     */
+    @Override
+    public List<Produit> getAllProduits() {
+
+        try {
+            List<Produit> produitList = produitRepository.findAll();
+
+            if (produitList.isEmpty()) {
+                throw new ProductRegistrationException("Aucun produit trouvé");
+            }
+
+            return produitList;
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur de la récupération des produits : " +e.getMessage());
+        }
+
+
+    }
+
+
+
+    /**
      * Méthode pour la mise à jour du produit
      * @param produit Le produit de mise à jour
      * @return Le produit
@@ -83,14 +107,7 @@ public class ProduitServiceImpl implements ProduitService{
         return produitRepository.findById(id).get();
     }
 
-    /**
-     * Méthode pour recupéré tous les produits
-     * @return Les produits
-     */
-    @Override
-    public List<Produit> getAllProduits() {
-        return produitRepository.findAll();
-    }
+
 
     @Override
     public List<Produit> findByNomProduit(String nom) {
