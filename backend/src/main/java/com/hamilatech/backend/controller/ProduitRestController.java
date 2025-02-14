@@ -34,10 +34,11 @@ public void createProduit(@RequestBody Produit produit){
     }
 
 //    Methode pour recuperer un produit par son id
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Produit getProduitById(@PathVariable("id") Long id){
-        return produitService.getProduit(id);
+    @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+    public Produit getProduitById(@PathVariable Long id){
+        return produitService.getProduitById(id);
     }
+
 
 // Methode pour modifier le produit
    @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -50,9 +51,10 @@ public void createProduit(@RequestBody Produit produit){
 
 
 //    Methode pour supprimer un produit
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void  deleteProduit(@PathVariable("id")Long id){
-        produitService.deleteProduitById(id);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(path = "{id}")
+    public void  deleteProduit(@PathVariable Long id){
+        this.produitService.deleteProduitById(id);
     }
 
 }

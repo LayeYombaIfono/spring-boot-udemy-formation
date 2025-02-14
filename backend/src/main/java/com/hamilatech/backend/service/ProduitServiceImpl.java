@@ -101,9 +101,38 @@ public class ProduitServiceImpl implements ProduitService{
     }
 
 
+    /**
+     * Méthoode pour rétourné un produit par son id
+     * @param id du produit
+     * @return ID
+     */
+    @Override
+    public Produit getProduitById(Long id) {
+        return produitRepository.findById(id)
+                .orElseThrow(()-> new ProductRegistrationException("Aucun produit n'existe avec cet ID "+ id));
+    }
 
 
 
+
+    /**
+     * Méthode pour supprimé un produit par son id
+     * @param id a supprimé
+     */
+    @Override
+    public void deleteProduitById(Long id) {
+
+        try {
+            //Verifier si le produit exit avant suppression
+            this.getProduitById(id);
+            //Supprimer le produit
+            produitRepository.deleteById(id);
+
+        } catch (ProductRegistrationException e) {
+            throw new RuntimeException("Erreur lors de la suppression du produit : "+e.getMessage());
+        }
+
+    }
 
     /**
      * Méthode pour supprimer un produit
@@ -113,26 +142,6 @@ public class ProduitServiceImpl implements ProduitService{
     public void deleteProduit(Produit produit) {
         produitRepository.delete(produit);
 
-    }
-
-    /**
-     * Méthode pour supprimé un produit par son id
-     * @param id a supprimé
-     */
-    @Override
-    public void deleteProduitById(Long id) {
-        produitRepository.deleteById(id);
-
-    }
-
-    /**
-     * Méthoode pour rétourné un produit par son id
-     * @param id du produit
-     * @return ID
-     */
-    @Override
-    public Produit getProduit(Long id) {
-        return produitRepository.findById(id).get();
     }
 
 

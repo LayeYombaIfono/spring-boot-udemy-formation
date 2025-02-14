@@ -9,10 +9,10 @@ public interface ProduitService {
 
     void saveProduit(Produit produit);
     void updateProduit( Long id, Produit produit);
+    List<Produit> getAllProduits();
+    Produit getProduitById(Long id);
     void deleteProduit(Produit produit);
     void deleteProduitById(Long id);
-    Produit getProduit(Long id);
-    List<Produit> getAllProduits();
 
 //    Ajout des methodes qui tries par nom
     List<Produit> findByNomProduit(String nom);
