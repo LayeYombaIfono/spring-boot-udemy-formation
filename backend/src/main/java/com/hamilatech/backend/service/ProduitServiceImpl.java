@@ -7,8 +7,10 @@ import com.hamilatech.backend.repository.ProduitRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Classe qui represent les méthodes CRUD.
@@ -135,20 +137,53 @@ public class ProduitServiceImpl implements ProduitService{
     }
 
     /**
-     * Méthode pour supprimer un produit
-     * @param produit Le produit a supprimé
+     * Supprimer le produit en lui founissant l'objet
+     * @param produit A supprimer
      */
-    @Override
-    public void deleteProduit(Produit produit) {
-        produitRepository.delete(produit);
 
+    @Override
+    public void deleteProduct(Produit produit) {
+
+        try {
+            // Verifier si le produit existe avec ID
+            Optional<Produit> existingProduit = produitRepository.findById(produit.getId());
+
+            if (existingProduit.isPresent()){
+                this.produitRepository.delete(produit);
+            }else {
+                throw new ProductRegistrationException(
+                        "Aucun produit trouvé avec ID : "+produit.getId()
+                );
+            }
+
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur lors de la suppresion du produit "+e.getMessage());
+        }
     }
 
-
-
+    /**
+     * Rechercher le produit par nom
+     * @param nom Du produit a chercher
+     * @return Liste des produits correspondante
+     * @throws ProductRegistrationException si aucun produit trouver avec ce nom
+     */
     @Override
-    public List<Produit> findByNomProduit(String nom) {
-        return produitRepository.findByNomProduit(nom);
+    public List<Produit> findByNomProduit( String nom) {
+
+        try {
+            List<Produit> produitList = produitRepository.findByNomProduit(nom);
+
+            if (produitList.isEmpty()){
+                throw new ProductRegistrationException("Aucun produit trouvé avec le nom : "+nom);
+            }
+
+            return produitList;
+
+        } catch (ProductRegistrationException e) {
+            throw new RuntimeException("Erreur lors de la recherche par nom "+e.getMessage());
+        }
+
     }
 
     @Override

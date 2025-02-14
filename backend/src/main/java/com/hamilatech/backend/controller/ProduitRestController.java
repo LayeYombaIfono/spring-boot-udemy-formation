@@ -28,7 +28,7 @@ public void createProduit(@RequestBody Produit produit){
 
 
 //   Méthode pour récuperer tout les produit
-    @GetMapping(path ="/all" , produces = APPLICATION_JSON_VALUE)
+    @GetMapping( produces = APPLICATION_JSON_VALUE)
    public List<Produit> getAllProduits(){
         return produitService.getAllProduits();
     }
@@ -42,7 +42,7 @@ public void createProduit(@RequestBody Produit produit){
 
 // Methode pour modifier le produit
    @ResponseStatus(HttpStatus.NO_CONTENT)
-@PutMapping(path = "{id}", consumes = APPLICATION_JSON_VALUE)
+    @PutMapping(path = "{id}", consumes = APPLICATION_JSON_VALUE)
     public void updateProduit(@PathVariable Long id,  @RequestBody Produit produit){
 
         this.produitService.updateProduit(id, produit);
@@ -50,11 +50,40 @@ public void createProduit(@RequestBody Produit produit){
     }
 
 
-//    Methode pour supprimer un produit
+
+
+    /**
+     *  Methode pour supprimer un produit par id
+     * @param id Numéro de produit a supprimé
+     */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "{id}")
     public void  deleteProduit(@PathVariable Long id){
         this.produitService.deleteProduitById(id);
     }
+
+
+    /**
+     * Supprimer le produit en founissant l'objet
+     * @param produit Produit a supprime
+     */
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(consumes = APPLICATION_JSON_VALUE)
+    public void deleteProduct(@RequestBody Produit produit){
+        this.produitService.deleteProduct(produit);
+    }
+
+    /**
+     * Rechercher les produit par nom
+     * @param nom Nom du produit rechercher
+     * @return Liste des produit correspondant
+     */
+    @GetMapping(path = "nom/{nom}", produces = APPLICATION_JSON_VALUE)
+    public List<Produit> findProduitByNom(@PathVariable String nom){
+        return produitService.findByNomProduit(nom);
+    }
+
+
+
 
 }
