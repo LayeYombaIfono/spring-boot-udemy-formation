@@ -43,6 +43,41 @@ public class ProduitServiceImpl implements ProduitService{
     }
 
 
+
+    /**
+     * Méthode pour la mise à jour du produit
+     * @param id Produit
+     * @param produit nom du produit
+     */
+    @Override
+    public void updateProduit(Long id, Produit produit) {
+        try {
+//            Verifier si le produit exist avec id
+            Produit product = this.produitRepository.getReferenceById(id);
+
+//            Verifier si le produit est deja enregistrer
+            boolean produitExist = produitRepository.findByNomProduit(produit.getNomProduit())
+                    .stream()
+                    .anyMatch(r -> !r.getId().equals(id));
+
+            if (produitExist){
+                throw new ProductRegistrationException("Le produit "+produit.getNomProduit()+ " exist deja .");
+            }
+
+            //Mettre a jour des informations du produit
+            product.setNomProduit(produit.getNomProduit());
+            product.setPrixProduit(produit.getPrixProduit());
+            product.setDateCreation(product.getDateCreation());
+            product.setCategorie(product.getCategorie());
+
+            // Sauvegarder le produit mise a jour
+            produitRepository.save(produit);
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur lors de la mise a jour du produit : " +e.getMessage());
+        }
+    }
+
+
     /**
      * Méthode pour recupéré tous les produits
      * @return Les produits
@@ -67,15 +102,8 @@ public class ProduitServiceImpl implements ProduitService{
 
 
 
-    /**
-     * Méthode pour la mise à jour du produit
-     * @param produit Le produit de mise à jour
-     * @return Le produit
-     */
-    @Override
-    public Produit updateProduit(Produit produit) {
-        return produitRepository.save(produit);
-    }
+
+
 
     /**
      * Méthode pour supprimer un produit

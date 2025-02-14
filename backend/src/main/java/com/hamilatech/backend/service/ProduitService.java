@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProduitService {
 
     void saveProduit(Produit produit);
-    Produit updateProduit(Produit produit);
+    void updateProduit( Long id, Produit produit);
     void deleteProduit(Produit produit);
     void deleteProduitById(Long id);
     Produit getProduit(Long id);

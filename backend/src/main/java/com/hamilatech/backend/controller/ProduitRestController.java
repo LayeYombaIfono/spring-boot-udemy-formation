@@ -40,9 +40,12 @@ public void createProduit(@RequestBody Produit produit){
     }
 
 // Methode pour modifier le produit
-    @RequestMapping(method = RequestMethod.PUT)
-    public Produit updateProduit(@RequestBody Produit produit){
-        return produitService.updateProduit(produit);
+   @ResponseStatus(HttpStatus.NO_CONTENT)
+@PutMapping(path = "{id}", consumes = APPLICATION_JSON_VALUE)
+    public void updateProduit(@PathVariable Long id,  @RequestBody Produit produit){
+
+        this.produitService.updateProduit(id, produit);
+
     }
 
 
