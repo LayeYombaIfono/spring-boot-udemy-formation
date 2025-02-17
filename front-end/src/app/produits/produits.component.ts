@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './produits.component.css'
 })
 export class ProduitsComponent {
+
+  produits : string[];
+
+  constructor() {
+    this.produits = ['Livre', 'Cahier', 'Stylo', 'Gomme'];
+  }
 
 }
