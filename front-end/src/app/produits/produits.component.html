@@ -3,30 +3,61 @@
   <div class="row">
     <div class="card mb-4">
       <div class="card-body">
-        <table class="table">
-          <thead class="table-primary">
+        <table class="table table-light table-hover">
+          @if (produits.length > 0) {
+          <thead class="table-dark  text-white">
             <tr>
-              <th scope="col">N°</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Prix</th>
-              <th scope="col">Quantité</th>
-              <th scope="col">Description</th>
-              <th scope="col">Catégorie</th>
+              <th scope="col" class="text-start">N°</th>
+              <th scope="col" class="text-start">Désignation</th>
+              <th scope="col" class="text-center">Prix</th>
+              <th scope="col" class="text-center">Date d'enregistrement</th>
+              <th scope="col" class="text-center">Actions</th>
             </tr>
           </thead>
+          } @for (produit of produits; track produit.idProduit; let
+          count=$count; let last=$last) {
 
-          @for (produit of produits; track produit) {
           <tbody>
             <tr>
-              <th>1</th>
-              <td>{{ produit }}</td>
-              <td>{{ produit }}</td>
-              <td>{{ produit }}</td>
-              <td>{{ produit }}</td>
-              <td>{{ produit }}</td>
+              <td class="text-start">{{ produit.idProduit }}</td>
+              <td>{{ produit.nomProduit }}</td>
+              <td class="text-center">
+                {{ produit.prixProduit | currency : "XOF" : "" : "1.0-0" }}
+              </td>
+              <td class="text-center">
+                {{ produit.dateCreation | date : "dd/MM/yyyy" }}
+              </td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-success absolute-center mx-2"
+                >
+                  Modifier
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger absolute-center mx-2"
+                >
+                  Supprimer
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
             </tr>
           </tbody>
+          @if (last) {
+            <h3 class="text-center text-dark absolute-center pt-2">Total : {{count}}</h3>
           }
+          }
+    
+          @if (produits.length === 0) {
+          <h3 class="text-center absolute-center pt-2 text-danger">
+            Aucun produit disponible !
+          </h3>
+          }
+          <!-- @empty {
+            <h3>Aucun produit disponible !</h3>
+          } -->
         </table>
       </div>
     </div>
