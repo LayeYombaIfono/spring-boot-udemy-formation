@@ -1,3 +1,77 @@
-<div class="container">
-   <h2>Ajouter un nouveau produit</h2>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Ajouter un nouveau produit</h2>
+  <form>
+    <!-- Champ ID Produit -->
+    <div class="mb-3">
+      <label for="productId" class="form-label">ID Produit</label>
+      <input
+         [(ngModel)]="newProduit.idProduit"
+         name="idProduit"
+        type="text"
+        class="form-control"
+        id="productId"
+        placeholder="Entrez l'ID du produit"
+        required
+      />
+    </div>
+
+    <!-- Champ Désignation -->
+    <div class="mb-3">
+      <label for="designation" class="form-label">Désignation</label>
+      <input
+      [(ngModel)]="newProduit.nomProduit"
+      name="nomProduit"
+        type="text"
+        class="form-control"
+        id="designation"
+        placeholder="Entrez la désignation du produit"
+        required
+      />
+    </div>
+
+    <!-- Champ Prix du produit -->
+    <div class="mb-3">
+      <label for="price" class="form-label">Prix du produit</label>
+      <input
+      [(ngModel)]="newProduit.prixProduit"
+      name="prixProduit"
+        type="number"
+        class="form-control"
+        id="price"
+        placeholder="Entrez le prix du produit"
+        step="0.01"
+        required
+      />
+    </div>
+
+    <!-- Champ Date d'enregistrement -->
+    <div class="mb-3">
+      <label for="registrationDate" class="form-label"
+        >Date d'enregistrement</label
+      >
+      <input 
+      [(ngModel)]="newProduit.dateCreation"
+      name="dateCreation"
+      type="date"
+       class="form-control"
+       id="registrationDate" 
+       required />
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button (click)="addProduit()" type="submit" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter le produit</button>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 class="text-dark fs-6"> {{message}}</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </form>
 </div>
