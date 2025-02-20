@@ -1,13 +1,15 @@
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Ajouter un nouveau produit</h2>
+  <h2 class="text-center mb-4">Modifier le produit</h2>
   <form>
     <!-- Champ ID Produit -->
     <div class="mb-3">
       <label for="productId" class="form-label">ID Produit</label>
       <input
-        [(ngModel)]="newProduit.idProduit"
+        [(ngModel)]="currentProduit.idProduit"
         name="idProduit"
         type="text"
+        readonly
+        disabled="true"
         class="form-control"
         id="productId"
         placeholder="Entrez l'ID du produit"
@@ -19,7 +21,7 @@
     <div class="mb-3">
       <label for="designation" class="form-label">Désignation</label>
       <input
-        [(ngModel)]="newProduit.nomProduit"
+        [(ngModel)]="currentProduit.nomProduit"
         name="nomProduit"
         type="text"
         class="form-control"
@@ -33,7 +35,7 @@
     <div class="mb-3">
       <label for="price" class="form-label">Prix du produit</label>
       <input
-        [(ngModel)]="newProduit.prixProduit"
+        [(ngModel)]="currentProduit.prixProduit"
         name="prixProduit"
         type="number"
         class="form-control"
@@ -50,7 +52,8 @@
         >Date d'enregistrement</label
       >
       <input
-        [(ngModel)]="newProduit.dateCreation"
+        [ngModel]="currentProduit.dateCreation | date : 'yyyy-MM-dd'"
+        (ngModelChange)="currentProduit.dateCreation = $event"
         name="dateCreation"
         type="date"
         class="form-control"
@@ -61,13 +64,14 @@
 
     <!-- Bouton de soumission -->
     <button
-      (click)="addProduit()"
+      (click)="updateProduit()"
       type="submit"
-      class="btn btn-primary"
+      class="btn btn-success"
       data-bs-toggle="modal"
       data-bs-target="#exampleModal"
     >
-      Ajouter le produit
+      <i class="bi bi-pencil-square"></i>
+      Modifier le produit
     </button>
     <!-- Modal -->
     <div
@@ -88,6 +92,7 @@
               class="btn btn-danger"
               data-bs-dismiss="modal"
             >
+              <i class="bi bi-x"></i>
               Fermer
             </button>
           </div>
