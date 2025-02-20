@@ -9,6 +9,7 @@
             <tr>
               <th scope="col" class="text-start">N°</th>
               <th scope="col" class="text-start">Désignation</th>
+              <th scope="col" class="text-center">Catégorie</th>
               <th scope="col" class="text-center">Prix</th>
               <th scope="col" class="text-center">Date d'enregistrement</th>
               <th scope="col" class="text-center">Actions</th>
@@ -23,6 +24,7 @@
             <tr>
               <td class="text-start">{{ produit.idProduit }}</td>
               <td>{{ produit.nomProduit }}</td>
+              <td>{{ produit.categorie?.nomCat }}</td>
               <td class="text-center">
                 {{ produit.prixProduit | currency : "GNF" }}
               </td>
