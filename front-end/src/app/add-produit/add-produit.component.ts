@@ -30,14 +30,14 @@ export class AddProduitComponent implements OnInit {
 // Initialisation du composant
   ngOnInit(): void {
     // Initialiser la liste des catégories
-    this.categories = this.produitService.listCategorie();
+    //this.categories = this.produitService.listCategorie();
   }
 
   // Méthode pour ajouter un produit
   addProduit() {
 
     // Ajouter la catégorie
-    this.newCategorie = this.produitService.consulCategorie(this.newIdCat);
+   // this.newCategorie = this.produitService.consultCategorie(this.newIdCat);
     this.newProduit.categorie = this.newCategorie;
 
     //Ajouter le produit

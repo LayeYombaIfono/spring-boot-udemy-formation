@@ -29,6 +29,27 @@
       />
     </div>
 
+        <!-- Champ de categorie
+      {#   <div class="mb-3">
+          <label for="idCat" class="form-label">Catégorie</label>
+          <select
+            [(ngModel)]="newIdCat"
+            class="form-control form-control-lg form-select"
+            name="idCat"
+            id="idCat"
+            required="required"
+    
+          >
+    
+            @for (cat of categories; track cat.idCat) {
+            <option  [value]="cat.idCat">
+              {{ cat.nomCat }}
+            </option>
+            }
+          </select>
+        </div> #}
+     -->
+
     <!-- Champ Prix du produit -->
     <div class="mb-3">
       <label for="price" class="form-label">Prix du produit</label>
@@ -59,25 +80,6 @@
       />
     </div>
 
-    <!-- Champ de categorie -->
-    <div class="mb-3">
-      <label for="idCat" class="form-label">Sélectionnez une catégorie</label>
-      <select
-        [(ngModel)]="newIdCat"
-        class="form-control form-control-lg form-select"
-        name="idCat"
-        id="idCat"
-        required="required"
-
-      >
-
-        @for (cat of categories; track cat.idCat) {
-        <option [value]="cat.idCat">
-          {{ cat.nomCat }}
-        </option>
-        }
-      </select>
-    </div>
 
     <!-- Bouton de soumission -->
     <button

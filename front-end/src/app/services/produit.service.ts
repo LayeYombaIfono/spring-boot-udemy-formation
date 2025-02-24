@@ -8,11 +8,11 @@ import { Categorie } from '../model/categorie.model';
 export class ProduitService {
   produits: Produit[]; //un tableau de Produit
 
-  categories: Categorie[];
+ // categories: Categorie[];
 
   // Constructeur
   constructor() {
-    this.categories = [
+    /* this.categories = [
       {
         idCat: 1,
         nomCat: 'Ordinateur',
@@ -30,46 +30,62 @@ export class ProduitService {
         nomCat: 'Tablette',
         description: 'Dimenson 150px',
       },
+      {
+        idCat: 4,
+        nomCat: 'Souris',
+        description: 'Dimenson 150px',
+      },
 
 
 
-    ];
+    ]; */
 
     this.produits = [
       {
         idProduit: 1,
         nomProduit: 'PC Asus',
-        prixProduit: 3000.6,
+        prixProduit: 3000000,
         dateCreation: new Date('01/14/2011'),
-        categorie : {
+       /*  categorie : {
             idCat: 1,
             nomCat: 'Ordinateur',
             description: 'Portatif',
-        }
+        } */
       },
       {
         idProduit: 2,
         nomProduit: 'Imprimante Epson',
-        prixProduit: 450,
+        prixProduit: 4500000,
         dateCreation: new Date('12/17/2010'),
 
-        categorie : {
+       /*  categorie : {
           idCat: 2,
           nomCat: 'Imprimante',
           description: 'Catouches noir',
-        }
+        } */
       },
       {
         idProduit: 3,
         nomProduit: 'Tablette Samsung',
-        prixProduit: 900.123,
+        prixProduit: 900000,
         dateCreation: new Date('02/20/2020'),
-        categorie : {
+        /* categorie : {
           idCat: 3,
           nomCat: 'Tablette',
           description: 'Dimenson 150px',
-        }
+        } */
       },
+      {
+        idProduit: 4,
+        nomProduit: 'Souris',
+        prixProduit: 30000,
+        dateCreation: new Date('02/20/2020'),
+       /*  categorie : {
+          idCat: 4,
+          nomCat: 'Souris',
+          description: 'Souris sans file',
+        } */
+      }
     ];
   }
 
@@ -92,7 +108,7 @@ export class ProduitService {
   }
 
   // Consulter le produit
-  consulProduit(id: number): Produit {
+  consultProduit(id: number): Produit {
     return this.produits.find((p) => p.idProduit == id)!;
   }
 
@@ -113,18 +129,18 @@ export class ProduitService {
    *Lister toutes les catégories
    * @returns Catégorie
    */
-  listCategorie():Categorie[]{
+ /*  listCategorie():Categorie[]{
     return this.categories;
-  }
+  } */
 
 /**
  * Méthode pour consulter une catégorie par son id
  * @param id Catégorie
  * @returns Catégorie
  */
-   consulCategorie(id : number): Categorie{
+/*    consultCategorie(id : number): Categorie{
       return this.categories.find(cat => cat.idCat == id)!;
-   }
+   } */
 
 
 

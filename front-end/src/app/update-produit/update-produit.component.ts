@@ -4,6 +4,7 @@ import { ProduitService } from '../services/produit.service';
 import { Produit } from '../model/produit.model';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { Categorie } from '../model/categorie.model';
 
 @Component({
   selector: 'app-update-produit',
@@ -12,7 +13,10 @@ import { DatePipe } from '@angular/common';
   styles: ``,
 })
 export class UpdateProduitComponent implements OnInit {
+
   currentProduit = new Produit();
+  //categories! : Categorie[];
+  updatedCatId! : number ;
 
   message: string = 'Le produit a été modifier avec succès !';
 
@@ -23,13 +27,17 @@ export class UpdateProduitComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      this.currentProduit = this.produitService.consulProduit(
-      this.activatedRoute.snapshot.params['id']
-    );
+
+   // this.categories = this.produitService.listCategorie();
+    this.currentProduit = this.produitService.consultProduit(this.activatedRoute.snapshot.params['id']);
+    this.updatedCatId = this.currentProduit!.categorie!.idCat;
   }
 
   updateProduit() {
+  // this.currentProduit.categorie = this.produitService.consultCategorie(this.updatedCatId);
     this.produitService.updateroduit(this.currentProduit);
     this.router.navigate(['produits']);
   }
+
+
 }
