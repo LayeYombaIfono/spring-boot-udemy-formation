@@ -1,17 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Produit } from '../model/produit.model';
-import { Categorie } from '../model/categorie.model';
+
+import { Observable } from 'rxjs';
+import {HttpClient, HttpHeaders } from '@angular/common/http';
+// import { Categorie } from '../model/categorie.model';
+
+
+const httpOptions ={
+    headers : new HttpHeaders(
+      {
+        'Content-Type' : 'application/json'
+      }
+    )
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProduitService {
-  produits: Produit[]; //un tableau de Produit
+
+  apiUrl : string = 'http://localhost:9091/api/products'
+
+  produits!: Produit[]; //un tableau de Produit
 
  // categories: Categorie[];
 
   // Constructeur
-  constructor() {
+  constructor( private http : HttpClient) {
+
+
+
     /* this.categories = [
       {
         idCat: 1,
@@ -40,53 +58,54 @@ export class ProduitService {
 
     ]; */
 
-    this.produits = [
+   /*  this.produits = [
       {
-        idProduit: 1,
+        id: 1,
         nomProduit: 'PC Asus',
         prixProduit: 3000000,
         dateCreation: new Date('01/14/2011'),
-       /*  categorie : {
+        categorie : {
             idCat: 1,
             nomCat: 'Ordinateur',
             description: 'Portatif',
-        } */
+        }
       },
       {
-        idProduit: 2,
+        id: 2,
         nomProduit: 'Imprimante Epson',
         prixProduit: 4500000,
         dateCreation: new Date('12/17/2010'),
 
-       /*  categorie : {
+        categorie : {
           idCat: 2,
           nomCat: 'Imprimante',
           description: 'Catouches noir',
-        } */
+        }
       },
       {
-        idProduit: 3,
+        id: 3,
         nomProduit: 'Tablette Samsung',
         prixProduit: 900000,
         dateCreation: new Date('02/20/2020'),
-        /* categorie : {
+        categorie : {
           idCat: 3,
           nomCat: 'Tablette',
           description: 'Dimenson 150px',
-        } */
+        }
       },
       {
-        idProduit: 4,
+        id: 4,
         nomProduit: 'Souris',
         prixProduit: 30000,
         dateCreation: new Date('02/20/2020'),
-       /*  categorie : {
+        categorie : {
           idCat: 4,
           nomCat: 'Souris',
           description: 'Souris sans file',
-        } */
+        }
       }
     ];
+    */
   }
 
   // Ajouter un produit
@@ -95,8 +114,8 @@ export class ProduitService {
   }
 
   // Afficher la liste des produits
-  listProduit(): Produit[] {
-    return this.produits;
+  listProduit(): Observable<Produit[]> {
+    return this.http.get<Produit[]>(this.apiUrl);
   }
 
   //Supprimer un produit
@@ -109,7 +128,7 @@ export class ProduitService {
 
   // Consulter le produit
   consultProduit(id: number): Produit {
-    return this.produits.find((p) => p.idProduit == id)!;
+    return this.produits.find((p) => p.id == id)!;
   }
 
   // Mise à jour du produit

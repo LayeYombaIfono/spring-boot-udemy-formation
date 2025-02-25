@@ -23,7 +23,12 @@ export class ProduitsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.produits = this.produitService.listProduit();
+    //this.produits = this.produitService.listProduit();
+
+    this.produitService.listProduit().subscribe( prods =>{
+        console.log(prods);
+        this.produits = prods;
+    })
   }
 
   // Supprimer un produit

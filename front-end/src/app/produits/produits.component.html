@@ -18,11 +18,11 @@
           }
 
 
-          @for (produit of produits; track produit.idProduit; let
+          @for (produit of produits; track produit.id; let
           count=$count; let last=$last) {
           <tbody>
             <tr>
-              <td class="text-start">{{ produit.idProduit }}</td>
+              <td class="text-start">{{ produit.id }}</td>
               <td>{{ produit.nomProduit }}</td>
             <!--  <td>{{ produit.categorie?.nomCat }}</td> -->
               <td class="text-center">
@@ -34,7 +34,7 @@
               <td class="text-center">
                 <button
                   type="button"
-                  [routerLink]="['/updateProduit', produit.idProduit]"
+                  [routerLink]="['/updateProduit', produit.id]"
                   class="btn btn-success absolute-center mx-2 btn-action"
                 >
                   <i class="bi bi-pencil-square"></i>

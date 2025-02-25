@@ -5,8 +5,8 @@
     <div class="mb-3">
       <label for="productId" class="form-label">ID Produit</label>
       <input
-        [(ngModel)]="newProduit.idProduit"
-        name="idProduit"
+        [(ngModel)]="newProduit.id"
+        name="id"
         type="text"
         class="form-control"
         id="productId"
@@ -38,9 +38,9 @@
             name="idCat"
             id="idCat"
             required="required"
-    
+
           >
-    
+
             @for (cat of categories; track cat.idCat) {
             <option  [value]="cat.idCat">
               {{ cat.nomCat }}

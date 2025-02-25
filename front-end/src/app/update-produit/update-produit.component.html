@@ -3,15 +3,15 @@
   <form>
     <!-- Champ ID Produit -->
     <div class="mb-3">
-      <label for="idProduit" class="form-label">ID Produit</label>
+      <label for="id" class="form-label">ID Produit</label>
       <input
-        [(ngModel)]="currentProduit.idProduit"
-        name="idProduit"
+        [(ngModel)]="currentProduit.id"
+        name="id"
         type="text"
         readonly
         disabled="true"
         class="form-control"
-        id="idProduit"
+        id="id"
         placeholder="Entrez l'ID du produit"
         required
       />
@@ -31,25 +31,25 @@
       />
     </div>
 
-    <!-- Champ Catégorie 
+    <!-- Champ Catégorie
     <div class="mb-3">
       <label for="idCat" class="form-label">Catégorie</label>
       <select [(ngModel)]="updatedCatId" class="form-select" id="idCat" name="idCat">
-       
+
         @for (cat of categories; track cat.idCat) {
           <option [value]="cat.idCat"> {{cat.nomCat}} </option>
         }
-      
+
       </select>
     </div>
    <div class="mb-3">
     <label for="idCat" class="form-label">Catégorie</label>
     <select [(ngModel)]="updatedCatId" class="form-select" id="idCat" name="idCat">
-     
+
       @for (cat of categories; track cat.idCat) {
         <option [value]="cat.idCat"> {{cat.nomCat}} </option>
       }
-     
+
     </select>
    </div>
    -->
