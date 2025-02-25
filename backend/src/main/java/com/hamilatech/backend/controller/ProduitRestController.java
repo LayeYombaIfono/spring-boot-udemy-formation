@@ -13,6 +13,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/products")
 public class ProduitRestController {
 

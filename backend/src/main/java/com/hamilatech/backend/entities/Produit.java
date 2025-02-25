@@ -1,5 +1,6 @@
 package com.hamilatech.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class Produit {
     private  double prixProduit;
 
    @Column
+   @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateCreation;
 
     @ManyToOne
