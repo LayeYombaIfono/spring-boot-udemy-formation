@@ -23,7 +23,7 @@ public class Produit {
     private  double prixProduit;
 
    @Column
-   @JsonFormat(pattern = "dd/MM/yyyy")
+   @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateCreation;
 
     @ManyToOne

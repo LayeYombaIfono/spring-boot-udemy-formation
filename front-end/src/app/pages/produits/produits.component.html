@@ -1,3 +1,4 @@
+<app-toolbar />
 <div class="container">
   <h2>Liste des produits</h2>
   <div class="row">
@@ -9,27 +10,24 @@
             <tr>
               <th scope="col" class="text-start">N°</th>
               <th scope="col" class="text-start">Désignation</th>
-            <!--  <th scope="col" class="text-center">Catégorie</th> -->
+              <!--  <th scope="col" class="text-center">Catégorie</th> -->
               <th scope="col" class="text-center">Prix</th>
               <th scope="col" class="text-center">Date d'enregistrement</th>
               <th scope="col" class="text-center">Actions</th>
             </tr>
           </thead>
-          }
-
-
-          @for (produit of produits; track produit.id; let
-          count=$count; let last=$last) {
+          } @for (produit of produits; track $index; let count=$count; let
+          last=$last) {
           <tbody>
             <tr>
-              <td class="text-start">{{ produit.id }}</td>
+              <td class="text-start">{{ $index + 1 }}</td>
               <td>{{ produit.nomProduit }}</td>
-            <!--  <td>{{ produit.categorie?.nomCat }}</td> -->
+              <!--  <td>{{ produit.categorie?.nomCat }}</td> -->
               <td class="text-center">
                 {{ produit.prixProduit }}
               </td>
               <td class="text-center">
-                {{ produit.dateCreation | date:'dd/MM/yyyy'}}
+                {{ produit.dateCreation | date : "dd/MM/yyyy" }}
               </td>
               <td class="text-center">
                 <button
@@ -52,7 +50,6 @@
             </tr>
           </tbody>
 
-
           @if (last) {
           <h3 class="text-center text-dark absolute-center pt-2">
             Total : {{ count }}
@@ -66,11 +63,6 @@
           <!-- @empty {
             <h3>Aucun produit disponible !</h3>
           } -->
-
-
-
-
-
         </table>
       </div>
     </div>

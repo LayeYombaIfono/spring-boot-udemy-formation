@@ -1,13 +1,37 @@
 import { Routes } from '@angular/router';
-import { AddProduitComponent } from './add-produit/add-produit.component';
-import { ProduitsComponent } from './produits/produits.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { UpdateProduitComponent } from './update-produit/update-produit.component';
 
 export const routes: Routes = [
-  { path: 'produits', component: ProduitsComponent },
-  { path: 'addproduit', component: AddProduitComponent },
-  {path : 'updateProduit/:id', component: UpdateProduitComponent },
+  // { path: 'produits', component: ProduitsComponent },
+  {
+    path: '',
+    title:'Produits',
+    loadComponent: ()=> import('./pages/produits/produits.component')
+  },
+
+  // { path: 'addproduit', component: AddProduitComponent },
+  {
+    path: 'add-produit',
+    title:'Enregistrement des produits',
+    loadComponent: ()=> import('./pages/add-produit/add-produit.component'),
+  },
+
+
+  // {path : 'updateProduit/:id', component: UpdateProduitComponent },
+
+  {
+    path: 'updateProduit/:id',
+    loadComponent: ()=> import('./pages/update-produit/update-produit.component')
+  },
+
   { path: '', redirectTo: 'produits', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent },
+
+  {
+    path: '404',
+    title:'Page-not-found',
+    loadComponent: ()=> import('./pages/page-not-found/page-not-found.component')
+  },
+
+  { path: '**',
+    redirectTo: '404'
+   },
 ];

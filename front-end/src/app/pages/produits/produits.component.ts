@@ -1,21 +1,22 @@
-import { Month } from './../../../node_modules/date-fns/types.d';
-import { Produit } from './../model/produit.model';
-import { Component, OnInit } from '@angular/core';
+import { Produit } from '../../core/model/produit.model';
+import { Component, inject, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { ProduitService } from '../services/produit.service';
+import { ProduitService } from '../../core/services/produit.service';
 import { Route, Router, RouterLink } from '@angular/router';
 import { parse } from 'date-fns';
+import { ToolbarComponent } from '../shared/toolbar.component';
 
 @Component({
   selector: 'app-produits',
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, ToolbarComponent],
   templateUrl: './produits.component.html',
   styleUrl: './produits.component.css',
 })
-export class ProduitsComponent implements OnInit {
+export default class ProduitsComponent implements OnInit {
   produits: Produit[] = [];
 
-  constructor(private produitService: ProduitService, private router: Router) {}
+  private produitService = inject(ProduitService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     //this.produits = this.produitService.listProduit();
@@ -55,7 +56,7 @@ export class ProduitsComponent implements OnInit {
       this.produitService.deleteProduit(prod.id).subscribe(() => {
         console.log('Produit supprimer');
         this.chargerPrduits();
-        this.router.navigate(['produits']);
+        this.router.navigate(['/']);
       });
     }
   }

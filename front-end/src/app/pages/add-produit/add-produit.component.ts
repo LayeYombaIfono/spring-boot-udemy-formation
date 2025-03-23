@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { Produit } from '../model/produit.model';
-import { ProduitService } from '../services/produit.service';
-import { Categorie } from '../model/categorie.model';
+import { Produit } from '../../core/model/produit.model';
+import { ProduitService } from '../../core/services/produit.service';
+import { Categorie } from '../../core/model/categorie.model';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { ToolbarComponent } from '../shared/toolbar.component';
 
 @Component({
   selector: 'app-add-produit',
-  imports: [FormsModule],
+  imports: [FormsModule, ToolbarComponent],
   templateUrl: './add-produit.component.html',
   styleUrl: './add-produit.component.css',
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
-export class AddProduitComponent implements OnInit {
+export default class AddProduitComponent implements OnInit {
   // Déclaration des variables pour le formulaire
   message: string = 'Produit ajouté avec succès !';
-
+  erreur = "Erreur lors de l'ajout du produit";
   newProduit = new Produit();
 
   // Variables catégorie
@@ -25,13 +26,9 @@ export class AddProduitComponent implements OnInit {
   newIdCat!: number;
   newCategorie!: Categorie;
 
-  constructor(
-    private produitService: ProduitService,
-    private router: Router,
-    private datePipe: DatePipe
-  ) {
-    // Injection du service ProduitService
-  }
+  private produitService = inject(ProduitService);
+  private router = inject(Router);
+  private datePipe = inject(DatePipe);
 
   // Initialisation du composant
   ngOnInit(): void {
@@ -44,14 +41,14 @@ export class AddProduitComponent implements OnInit {
     if (this.newProduit.dateCreation) {
       this.newProduit.dateCreation = this.datePipe.transform(
         this.newProduit.dateCreation,
-        'dd/MM/yyyy'
+        'yyyy-MM-dd'
       )!;
     }
 
     this.produitService.ajouterProduit(this.newProduit).subscribe(
       (prod) => {
         //console.log(prod);
-        this.router.navigate(['produits']);
+        this.router.navigate(['/']);
       },
       (error) => {
         console.error("Erreur lors de l'ajout du produit", error);

@@ -1,17 +1,18 @@
+<app-toolbar />
+
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Modifier le produit</h2>
+  <h2 class="text-center mb-4">Ajouter un nouveau produit</h2>
   <form>
     <!-- Champ ID Produit -->
+    @if(newProduit !== undefined){
     <div hidden class="mb-3">
-      <label for="id" class="form-label">ID Produit</label>
+      <label for="productId" class="form-label">ID Produit</label>
       <input
-        [(ngModel)]="currentProduit.id"
+        [(ngModel)]="newProduit.id"
         name="id"
         type="text"
-        readonly
-        disabled="true"
         class="form-control"
-        id="id"
+        id="productId"
         placeholder="Entrez l'ID du produit"
         required
       />
@@ -21,7 +22,7 @@
     <div class="mb-3">
       <label for="designation" class="form-label">Désignation</label>
       <input
-        [(ngModel)]="currentProduit.nomProduit"
+        [(ngModel)]="newProduit.nomProduit"
         name="nomProduit"
         type="text"
         class="form-control"
@@ -31,34 +32,32 @@
       />
     </div>
 
-    <!-- Champ Catégorie
-    <div class="mb-3">
-      <label for="idCat" class="form-label">Catégorie</label>
-      <select [(ngModel)]="updatedCatId" class="form-select" id="idCat" name="idCat">
-
-        @for (cat of categories; track cat.idCat) {
-          <option [value]="cat.idCat"> {{cat.nomCat}} </option>
-        }
-
-      </select>
-    </div>
-   <div class="mb-3">
-    <label for="idCat" class="form-label">Catégorie</label>
-    <select [(ngModel)]="updatedCatId" class="form-select" id="idCat" name="idCat">
-
-      @for (cat of categories; track cat.idCat) {
-        <option [value]="cat.idCat"> {{cat.nomCat}} </option>
-      }
-
-    </select>
-   </div>
-   -->
+    <!-- Champ de categorie
+        {#   <div class="mb-3">
+            <label for="idCat" class="form-label">Catégorie</label>
+            <select
+              [(ngModel)]="newIdCat"
+              class="form-control form-control-lg form-select"
+              name="idCat"
+              id="idCat"
+              required="required"
+  
+            >
+  
+              @for (cat of categories; track cat.idCat) {
+              <option  [value]="cat.idCat">
+                {{ cat.nomCat }}
+              </option>
+              }
+            </select>
+          </div> #}
+       -->
 
     <!-- Champ Prix du produit -->
     <div class="mb-3">
       <label for="price" class="form-label">Prix du produit</label>
       <input
-        [(ngModel)]="currentProduit.prixProduit"
+        [(ngModel)]="newProduit.prixProduit"
         name="prixProduit"
         type="number"
         class="form-control"
@@ -75,8 +74,7 @@
         >Date d'enregistrement</label
       >
       <input
-        [ngModel]="currentProduit.dateCreation | date : 'yyyy-MM-dd'"
-        (ngModelChange)="currentProduit.dateCreation = $event"
+        [(ngModel)]="newProduit.dateCreation"
         name="dateCreation"
         type="date"
         class="form-control"
@@ -87,14 +85,14 @@
 
     <!-- Bouton de soumission -->
     <button
-      (click)="updateProduit()"
+      (click)="addProduit()"
       type="submit"
       class="btn btn-success"
       data-bs-toggle="modal"
       data-bs-target="#exampleModal"
     >
-      <i class="bi bi-pencil-square"></i>
-      Modifier le produit
+      <i class="bi bi-plus"></i>
+      Ajouter
     </button>
     <!-- Modal -->
     <div
@@ -115,12 +113,15 @@
               class="btn btn-danger"
               data-bs-dismiss="modal"
             >
-              <i class="bi bi-x"></i>
               Fermer
             </button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- <span>{{ erreur }}</span> -->
+
+    }@else{ }
   </form>
 </div>
