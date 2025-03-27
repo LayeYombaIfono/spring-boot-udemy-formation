@@ -3,6 +3,7 @@ import { Produit } from '../model/produit.model';
 
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Categorie } from '../model/categorie.model';
 // import { Categorie } from '../model/categorie.model';
 
 const httpOptions = {
@@ -16,10 +17,11 @@ const httpOptions = {
 })
 export class ProduitService {
   apiUrl: string = 'http://localhost:9091/api/products';
+  // apiUrl: string = 'http://localhost:9091/api';
 
   produits!: Produit[]; //un tableau de Produit
 
-  // categories: Categorie[];
+  categories!: Categorie[];
 
   // Constructeur
   constructor(private http: HttpClient) {}
@@ -57,16 +59,16 @@ export class ProduitService {
    *Lister toutes les catégories
    * @returns Catégorie
    */
-  /*  listCategorie():Categorie[]{
-    return this.categories;
-  } */
+  listCategorie(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(this.apiUrl + '/categories');
+  }
 
   /**
    * Méthode pour consulter une catégorie par son id
    * @param id Catégorie
    * @returns Catégorie
    */
-  /*    consultCategorie(id : number): Categorie{
-      return this.categories.find(cat => cat.idCat == id)!;
-   } */
+  consultCategorie(id: number): Categorie {
+    return this.categories.find((cat) => cat.idCat == id)!;
+  }
 }

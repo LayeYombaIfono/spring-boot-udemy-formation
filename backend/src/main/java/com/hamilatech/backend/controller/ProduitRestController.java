@@ -17,9 +17,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin
 @RequestMapping(path = "/products")
 public class ProduitRestController {
-
     @Autowired
-    ProduitService produitService;
+    private ProduitService produitService;
 
 //    Méthode pour créer un produit
 @ResponseStatus(value = HttpStatus.ACCEPTED)

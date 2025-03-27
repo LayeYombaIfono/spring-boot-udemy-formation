@@ -4,34 +4,33 @@ export const routes: Routes = [
   // { path: 'produits', component: ProduitsComponent },
   {
     path: '',
-    title:'Produits',
-    loadComponent: ()=> import('./pages/produits/produits.component')
+    title: 'Produits',
+    loadComponent: () => import('./pages/produits/produits.component'),
   },
 
   // { path: 'addproduit', component: AddProduitComponent },
   {
     path: 'add-produit',
-    title:'Enregistrement des produits',
-    loadComponent: ()=> import('./pages/add-produit/add-produit.component'),
+    title: 'Enregistrement des produits',
+    loadComponent: () => import('./pages/add-produit/add-produit.component'),
   },
-
 
   // {path : 'updateProduit/:id', component: UpdateProduitComponent },
 
   {
     path: 'updateProduit/:id',
-    loadComponent: ()=> import('./pages/update-produit/update-produit.component')
+    loadComponent: () =>
+      import('./pages/update-produit/update-produit.component'),
   },
 
   { path: '', redirectTo: 'produits', pathMatch: 'full' },
 
   {
     path: '404',
-    title:'Page-not-found',
-    loadComponent: ()=> import('./pages/page-not-found/page-not-found.component')
+    title: 'Page-not-found',
+    loadComponent: () =>
+      import('./pages/page-not-found/page-not-found.component'),
   },
 
-  { path: '**',
-    redirectTo: '404'
-   },
+  { path: '**', redirectTo: '404' },
 ];

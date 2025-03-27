@@ -6,11 +6,7 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+
 @Entity
 @Table(name = "table_categorie")
 public class Categorie {
@@ -22,15 +18,41 @@ public class Categorie {
     @Column
     private String nomCat;
 
-    @Column
-    private String descriptionCat;
-
-
 
     @OneToMany(mappedBy = "categorie")
     @JsonIgnore
    private List<Produit> produits;
 
+    public Categorie() {
+        super();
+    }
 
+    public Categorie(String nomCat, List<Produit> produits) {
+        this.nomCat = nomCat;
+        this.produits = produits;
+    }
 
+    public Long getIdCat() {
+        return idCat;
+    }
+
+    public void setIdCat(Long idCat) {
+        this.idCat = idCat;
+    }
+
+    public String getNomCat() {
+        return nomCat;
+    }
+
+    public void setNomCat(String nomCat) {
+        this.nomCat = nomCat;
+    }
+
+    public List<Produit> getProduits() {
+        return produits;
+    }
+
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
+    }
 }

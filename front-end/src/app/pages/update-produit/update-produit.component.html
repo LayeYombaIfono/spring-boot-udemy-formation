@@ -1,4 +1,4 @@
-<app-toolbar/>
+<app-toolbar />
 
 <div class="container mt-5">
   <h2 class="text-center mb-4">Modifier le produit</h2>
@@ -33,28 +33,32 @@
       />
     </div>
 
-    <!-- Champ Catégorie
     <div class="mb-3">
       <label for="idCat" class="form-label">Catégorie</label>
-      <select [(ngModel)]="updatedCatId" class="form-select" id="idCat" name="idCat">
-
+      <select
+        [(ngModel)]="updatedCatId"
+        class="form-select"
+        id="idCat"
+        name="idCat"
+      >
         @for (cat of categories; track cat.idCat) {
-          <option [value]="cat.idCat"> {{cat.nomCat}} </option>
+        <option [value]="cat.idCat">{{ cat.nomCat }}</option>
         }
-
       </select>
     </div>
-   <div class="mb-3">
-    <label for="idCat" class="form-label">Catégorie</label>
-    <select [(ngModel)]="updatedCatId" class="form-select" id="idCat" name="idCat">
-
-      @for (cat of categories; track cat.idCat) {
-        <option [value]="cat.idCat"> {{cat.nomCat}} </option>
-      }
-
-    </select>
-   </div>
-   -->
+    <!-- <div class="mb-3">
+      <label for="idCat" class="form-label">Catégorie</label>
+      <select
+        [(ngModel)]="updatedCatId"
+        class="form-select"
+        id="idCat"
+        name="idCat"
+      >
+        @for (cat of categories; track cat.idCat) {
+        <option [value]="cat.idCat">{{ cat.nomCat }}</option>
+        }
+      </select>
+    </div> -->
 
     <!-- Champ Prix du produit -->
     <div class="mb-3">
@@ -99,7 +103,7 @@
       Modifier le produit
     </button>
     <!-- Modal -->
-    <div
+    <!-- <div
       class="modal fade"
       id="exampleModal"
       tabindex="-1"
@@ -123,6 +127,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </form>
 </div>
