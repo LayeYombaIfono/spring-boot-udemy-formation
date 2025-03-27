@@ -66,8 +66,8 @@ export default class AddProduitComponent implements OnInit, OnDestroy {
     )!;
     this.produitService.ajouterProduit(this.newProduit).subscribe(
       (prod) => {
-        // console.log('Produit ajoutes avec succes' + prod);
         this.router.navigate(['/']);
+        console.log('Produit ajoutes avec succes' + prod);
       },
       (error) => {
         console.error("Erreur lors de l'ajout du produit", error);

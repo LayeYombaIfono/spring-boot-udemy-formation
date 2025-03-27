@@ -4,7 +4,7 @@ import { Produit } from '../model/produit.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Categorie } from '../model/categorie.model';
-// import { Categorie } from '../model/categorie.model';
+import { environment } from '../../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,11 +16,9 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class ProduitService {
-  apiUrl: string = 'http://localhost:9091/api/products';
-  // apiUrl: string = 'http://localhost:9091/api';
+  apiUrl: string = environment.baseUrl; // Url
 
   produits!: Produit[]; //un tableau de Produit
-
   categories!: Categorie[];
 
   // Constructeur
