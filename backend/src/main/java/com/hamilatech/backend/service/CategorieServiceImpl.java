@@ -1,6 +1,7 @@
 package com.hamilatech.backend.service;
 
 import com.hamilatech.backend.entities.Categorie;
+import com.hamilatech.backend.exception.ProductNotFoundException;
 import com.hamilatech.backend.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 
@@ -46,11 +47,24 @@ public class CategorieServiceImpl implements  CategoryService{
 
     }
 
-    @Override
-    public void deleteCategoryById(Long id) {
-        this.repository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Aucune catégorie trouvé avec ID " + id));
-    }
 
+	
+	@Override
+	public Categorie getCategoryById(Long id) {
+		
+		return repository.findById(id)
+				.orElseThrow(RuntimeException::new);
+	}
+	
+	@Override
+	public void deleteCategoryById(Long id) {
+		try {
+			this.getCategoryById(id);
+			repository.deleteById(id);
+		} catch (Exception e) {
+			throw new RuntimeException("Erreur" + e.getMessage());
+		}
+	
+	}
 
 }

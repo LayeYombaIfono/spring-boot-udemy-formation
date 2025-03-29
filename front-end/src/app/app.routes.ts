@@ -23,6 +23,13 @@ export const routes: Routes = [
       import('./pages/update-produit/update-produit.component'),
   },
 
+  {
+    path: 'search-category',
+    title: 'Recherche par categorie',
+    loadComponent: () =>
+      import('./pages/search-by-category/search-by-category.component'),
+  },
+
   { path: '', redirectTo: 'produits', pathMatch: 'full' },
 
   {

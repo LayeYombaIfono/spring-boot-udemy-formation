@@ -1,0 +1,43 @@
+<app-toolbar />
+<div class="container">
+  <!-- Selectionner une categorie -->
+  <div class="mb-4">
+    <label for="idCat" class="pb-2 text-dark">Catégorie</label>
+    <select
+      [(ngModel)]="idCategorie"
+      (change)="onChange()"
+      name="idCat"
+      id="idCat"
+      class="form-control form-control-lg"
+    >
+      @for (cat of Categories; track $index) {
+      <option value="{{ cat.idCat }}">{{ cat.nomCat }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="card mt-4 table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+      <tr class="fs-6">
+        <th class="col">Id</th>
+        <th class="col">Désignation</th>
+        <th class="col">Catégorie</th>
+        <th class="col">Prix</th>
+        <th class="col">Date d'enregistrement</th>
+      </tr>
+      @for (produit of produits; track $index) {
+
+      <tbody>
+        <tr>
+          <th scope="row">{{ $index + 1 }}</th>
+          <td>{{ produit.nomProduit }}</td>
+          <td>{{ produit.categorie }}</td>
+          <td>{{ produit.prixProduit }}</td>
+          <td>{{ produit.dateCreation }}</td>
+        </tr>
+      </tbody>
+      }
+    </table>
+  </div>
+  <!-- } -->
+</div>

@@ -14,10 +14,11 @@ import java.util.List;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(path = "/products/categories")
+@RequestMapping(path = "/categories")
 @CrossOrigin
 public class CategoryRestController {
-    @Autowired
+    
+	@Autowired
     private CategoryService service;
 
 
@@ -30,14 +31,20 @@ public class CategoryRestController {
     }
 
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-   @RequestMapping(method = RequestMethod.GET)
+   @GetMapping
     public List<Categorie> getAllCategories(){
         return this.service.getAllCategory();
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(path = "{id}")
-    public void deleteCategoryById(Long id){
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @DeleteMapping(path = "/{id}")
+    public void deleteCategoryById(@PathVariable Long id){
         this.service.deleteCategoryById(id);
+    }
+    
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @GetMapping(path = "/{id}")
+    public Categorie getCategoryById(@PathVariable Long id) {
+    	return service.getCategoryById(id);
     }
 }
