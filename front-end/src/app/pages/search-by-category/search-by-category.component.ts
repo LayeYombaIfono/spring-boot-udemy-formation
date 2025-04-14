@@ -1,7 +1,8 @@
+import { Produit } from './../../core/model/produit.model';
 import { Categorie } from './../../core/model/categorie.model';
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ToolbarComponent } from '../shared/toolbar.component';
-import { Produit } from '../../core/model/produit.model';
+// import { Produit } from '../../core/model/produit.model';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ProduitService } from '../../core/services/produit.service';
@@ -35,16 +36,17 @@ export default class SearchByCategoryComponent implements OnInit, OnDestroy {
     this.onSubscription = this.produitService
       .listCategorie()
       .subscribe((cats) => {
-        this.Categories = cats;
+        this.Categories = cats._embedded.categories;
         console.log(cats);
       });
   }
 
-  onChange() {
-    this.produitService
-      .searchProductByCategory(this.idCategorie)
-      .subscribe((prods) => {
-        this.produits = prods;
-      });
-  }
+  // onChange() {
+  //   this.produitService
+  //     .searchProductByCategory(this.idCategorie)
+  //     .subscribe((res) => {
+  //       this.produits = Array.isArray(res) ? res : [res];
+  //       console.log(this.produits);
+  //     });
+  // }
 }

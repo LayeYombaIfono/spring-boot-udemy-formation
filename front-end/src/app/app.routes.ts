@@ -30,6 +30,13 @@ export const routes: Routes = [
       import('./pages/search-by-category/search-by-category.component'),
   },
 
+  {
+    path: 'search-name',
+    title: 'Recherche par nom du produit',
+    loadComponent: () =>
+      import('./pages/search-product-by-name/search-product-by-name.component'),
+  },
+
   { path: '', redirectTo: 'produits', pathMatch: 'full' },
 
   {

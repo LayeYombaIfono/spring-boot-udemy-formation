@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Categorie } from '../model/categorie.model';
 import { environment } from '../../../../environments/environment';
+import { CategoryWrapper } from '../model/categoryWrapper.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,6 +18,7 @@ const httpOptions = {
 })
 export class ProduitService {
   apiUrl: string = environment.baseUrl; // Url
+  urlCat: string = environment.baseUrlCat;
 
   produits!: Produit[]; //un tableau de Produit
   categories!: Categorie[];
@@ -26,33 +28,29 @@ export class ProduitService {
 
   // Ajouter un produit
   ajouterProduit(prod: Produit): Observable<Produit> {
-    return this.http.post<Produit>(
-      `${this.apiUrl}/products`,
-      prod,
-      httpOptions
-    );
+    return this.http.post<Produit>(`${this.apiUrl}`, prod, httpOptions);
   }
 
   // Afficher la liste des produits
   listProduit(): Observable<Produit[]> {
-    return this.http.get<Produit[]>(`${this.apiUrl}/products`);
+    return this.http.get<Produit[]>(this.apiUrl);
   }
 
   //Supprimer un produit
   deleteProduit(id: number) {
-    const url = `${this.apiUrl}/products/${id}`;
+    const url = `${this.apiUrl}/${id}`;
     return this.http.delete(url, httpOptions);
   }
 
   // Consulter le produit
   consultProduit(id: number): Observable<Produit> {
-    const url = `${this.apiUrl}/products/${id}`;
+    const url = `${this.apiUrl}/${id}`;
     return this.http.get<Produit>(url);
   }
 
   // Mise à jour du produit
   updateProduit(prod: Produit): Observable<Produit> {
-    const url = `${this.apiUrl}/products/${prod.id}`;
+    const url = `${this.apiUrl}/${prod.id}`;
     return this.http.put<Produit>(url, prod, httpOptions);
   }
 
@@ -61,8 +59,8 @@ export class ProduitService {
    *Lister toutes les catégories
    * @returns Catégorie
    */
-  listCategorie(): Observable<Categorie[]> {
-    return this.http.get<Categorie[]>(`${this.apiUrl}/categories`);
+  listCategorie(): Observable<CategoryWrapper> {
+    return this.http.get<CategoryWrapper>(this.urlCat);
   }
 
   /**
@@ -80,7 +78,12 @@ export class ProduitService {
    * @returns
    */
   searchProductByCategory(idcat: number): Observable<Produit[]> {
-    const url = `${this.apiUrl}/categories/${idcat}`;
+    const url = `${this.apiUrl}/prodscat/${idcat}`;
+    return this.http.get<Produit[]>(url);
+  }
+
+  searchByProductName(name: string): Observable<Produit[]> {
+    const url = `${this.apiUrl}/name/${name}`;
     return this.http.get<Produit[]>(url);
   }
 }

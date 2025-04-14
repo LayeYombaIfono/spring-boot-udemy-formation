@@ -1,0 +1,56 @@
+<app-toolbar />
+
+<div class="container">
+  <h3 class="text-center fs-3 text-black fw-medium">
+    Rechercher les produits par nom
+  </h3>
+
+  <form class="form-inline">
+    <div class="form-group mx-sm-3 mb-3 mt-2">
+      <label for="nomProduit" class="form-label"
+        >Entrer le nom du produit</label
+      >
+      <input
+        [(ngModel)]="nomProduit"
+        type="search"
+        name="nomProduit"
+        id="nomProduit"
+        class="form-control"
+        placeholder="Rechercher par nom du produit "
+        aria-describedby="helpId"
+      />
+      <button
+        (click)="onSearchProduct()"
+        type="button"
+        id="seach"
+        class="btn btn-primary mt-3"
+      >
+        Rechercher
+      </button>
+    </div>
+  </form>
+
+  <div class="card mt-4 table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+      <tr class="fs-6">
+        <th class="col">Id</th>
+        <th class="col">Désignation</th>
+        <th class="col">Catégorie</th>
+        <th class="col">Prix</th>
+        <th class="col">Date d'enregistrement</th>
+      </tr>
+      @for (produit of produits; track $index) {
+
+      <tbody>
+        <tr>
+          <th scope="row">{{ $index + 1 }}</th>
+          <td>{{ produit.nomProduit }}</td>
+          <td>{{ produit.categorie.nomCat }}</td>
+          <td>{{ produit.prixProduit }}</td>
+          <td>{{ produit.dateCreation }}</td>
+        </tr>
+      </tbody>
+      }
+    </table>
+  </div>
+</div>

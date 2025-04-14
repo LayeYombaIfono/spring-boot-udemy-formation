@@ -39,7 +39,7 @@ export default class UpdateProduitComponent implements OnInit, OnDestroy {
     this.onSubscription = this.produitService
       .listCategorie()
       .subscribe((cats) => {
-        this.categories = cats;
+        this.categories = cats._embedded.categories;
         console.log(cats);
       });
   }

@@ -1,6 +1,6 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
 
-*{
+* {
   padding: 0;
   margin: 0;
   padding: 0;
@@ -9,27 +9,20 @@
 
 body {
   height: 100%;
-  
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
   font-size: 1rem;
- 
 }
 
 input {
-  outline: none!important;
-  border: 1px solid #000!important;
- 
+  outline: none !important;
+  border: 1px solid #000 !important;
 }
 
-
-.table th, .table td {
+.table th,
+.table td {
   padding: 0.5rem;
-  
 }
 
-.btn-action{
+.btn-action {
   font-size: 0.7rem;
 }
-
-
-
