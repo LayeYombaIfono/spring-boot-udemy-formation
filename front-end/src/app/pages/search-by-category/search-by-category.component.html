@@ -4,6 +4,7 @@
   <div class="mb-4">
     <label for="idCat" class="pb-2 text-dark">Catégorie</label>
     <select
+      (change)="onChange()"
       [(ngModel)]="idCategorie"
       name="idCat"
       id="idCat"
@@ -30,7 +31,7 @@
         <tr>
           <th scope="row">{{ $index + 1 }}</th>
           <td>{{ produit.nomProduit }}</td>
-          <td>{{ produit.categorie }}</td>
+          <td>{{ produit.categorie.nomCat }}</td>
           <td>{{ produit.prixProduit }}</td>
           <td>{{ produit.dateCreation }}</td>
         </tr>

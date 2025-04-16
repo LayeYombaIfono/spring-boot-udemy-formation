@@ -14,8 +14,8 @@ import java.util.List;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(path = "/categories")
-@CrossOrigin
+@RequestMapping(path = "/api/cats")
+//@CrossOrigin
 public class CategoryRestController {
     
 	@Autowired

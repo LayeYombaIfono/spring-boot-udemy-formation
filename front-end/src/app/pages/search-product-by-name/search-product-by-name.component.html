@@ -5,7 +5,35 @@
     Rechercher les produits par nom
   </h3>
 
+  <!-- Utilisation des pipes pour des recherches -->
   <form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2 mt-2">
+      <label for="nomProduit">Rechercher par nom du produit</label>
+      <input
+        #nom
+        [(ngModel)]="searchProductByName"
+        name="searchProductByName"
+        type="text"
+        class="form-control"
+        placeholder="Rechercher par nom du produit"
+      />
+    </div>
+  </form>
+
+  <!-- Rechercher un produit en tapant le clavier -->
+  <!-- <form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2 mt-2">
+      <label for="nomProduit">Produit</label>
+      <input
+        type="text"
+        class="form-control"
+        #searchProduct
+        (keyup)="onkeyup(searchProduct.value)"
+      />
+    </div>
+  </form> -->
+
+  <!-- <form class="form-inline">
     <div class="form-group mx-sm-3 mb-3 mt-2">
       <label for="nomProduit" class="form-label"
         >Entrer le nom du produit</label
@@ -28,7 +56,7 @@
         Rechercher
       </button>
     </div>
-  </form>
+  </form> -->
 
   <div class="card mt-4 table-responsive">
     <table class="table table-bordered table-striped table-hover">
@@ -39,11 +67,12 @@
         <th class="col">Prix</th>
         <th class="col">Date d'enregistrement</th>
       </tr>
-      @for (produit of produits; track $index) {
+      @for (produit of produits | searchFilter: searchProductByName; track
+      produit.id) {
 
       <tbody>
         <tr>
-          <th scope="row">{{ $index + 1 }}</th>
+          <th scope="row">{{ produit.id }}</th>
           <td>{{ produit.nomProduit }}</td>
           <td>{{ produit.categorie.nomCat }}</td>
           <td>{{ produit.prixProduit }}</td>

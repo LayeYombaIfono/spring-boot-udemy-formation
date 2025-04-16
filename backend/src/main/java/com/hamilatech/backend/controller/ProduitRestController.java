@@ -9,13 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @AllArgsConstructor
 @RestController
-@CrossOrigin
-@RequestMapping(path = "/products")
+//@CrossOrigin
+@RequestMapping(path = "/api")
 public class ProduitRestController {
     @Autowired
     private ProduitService produitService;
@@ -82,6 +83,15 @@ public void createProduit(@RequestBody Produit produit){
     @GetMapping(path = "nom/{nom}", produces = APPLICATION_JSON_VALUE)
     public List<Produit> findProduitByNom(@PathVariable String nom){
         return produitService.findByNomProduit(nom);
+    }
+    
+//    Retourne des produit par categorie
+    
+    @GetMapping(value = "/prodscat/{idCat}")
+    private Optional<Produit> getAllsProductByIdCategory(@PathVariable Long idCat){
+    	
+    	return produitService.findByCategoryBy_IdCat(idCat);
+    	
     }
 
 

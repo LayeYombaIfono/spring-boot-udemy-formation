@@ -59,8 +59,8 @@ export class ProduitService {
    *Lister toutes les catégories
    * @returns Catégorie
    */
-  listCategorie(): Observable<CategoryWrapper> {
-    return this.http.get<CategoryWrapper>(this.urlCat);
+  listCategorie(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(this.urlCat);
   }
 
   /**

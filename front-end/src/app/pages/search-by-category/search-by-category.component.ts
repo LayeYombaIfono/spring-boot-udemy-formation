@@ -36,17 +36,17 @@ export default class SearchByCategoryComponent implements OnInit, OnDestroy {
     this.onSubscription = this.produitService
       .listCategorie()
       .subscribe((cats) => {
-        this.Categories = cats._embedded.categories;
+        this.Categories = cats;
         console.log(cats);
       });
   }
 
-  // onChange() {
-  //   this.produitService
-  //     .searchProductByCategory(this.idCategorie)
-  //     .subscribe((res) => {
-  //       this.produits = Array.isArray(res) ? res : [res];
-  //       console.log(this.produits);
-  //     });
-  // }
+  onChange() {
+    this.produitService
+      .searchProductByCategory(this.idCategorie)
+      .subscribe((res) => {
+        this.produits = Array.isArray(res) ? res : [res];
+        console.log(this.produits);
+      });
+  }
 }

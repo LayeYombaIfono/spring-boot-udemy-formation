@@ -7,10 +7,11 @@ import { ProduitService } from '../../core/services/produit.service';
 import { catchError, of, Subscription } from 'rxjs';
 import { Categorie } from '../../core/model/categorie.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SearchFilterPipe } from '../../pipe/search-filter.pipe';
 
 @Component({
   selector: 'app-search-product-by-name',
-  imports: [ToolbarComponent, FormsModule, CommonModule],
+  imports: [ToolbarComponent, FormsModule, CommonModule, SearchFilterPipe],
   templateUrl: './search-product-by-name.component.html',
   styles: ``,
 })
@@ -19,6 +20,9 @@ export default class SearchProductByNameComponent implements OnInit, OnDestroy {
   categories!: Categorie[];
 
   nomProduit!: string;
+
+  allProducts!: Produit[];
+  searchProductByName!: string;
 
   private productService = inject(ProduitService);
 
@@ -33,7 +37,11 @@ export default class SearchProductByNameComponent implements OnInit, OnDestroy {
 
   // Chargement des produits
   chargingProduct() {
-    this.produits = [];
+    this.onSubscription = this.productService
+      .listProduit()
+      .subscribe((prods) => {
+        this.produits = prods;
+      });
   }
 
   onSearchProduct() {
@@ -58,5 +66,14 @@ export default class SearchProductByNameComponent implements OnInit, OnDestroy {
           this.produits = prods;
         });
     }
+  }
+
+  // Rechercher un produit en tappant le clavier
+
+  onkeyup(filterText: string) {
+    this.produits = this.allProducts.filter((item) => {
+      item.nomProduit.toLowerCase().includes(filterText);
+      console.log(item.nomProduit);
+    });
   }
 }

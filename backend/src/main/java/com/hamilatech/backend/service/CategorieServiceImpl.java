@@ -3,14 +3,14 @@ package com.hamilatech.backend.service;
 import com.hamilatech.backend.entities.Categorie;
 import com.hamilatech.backend.exception.ProductNotFoundException;
 import com.hamilatech.backend.repository.CategoryRepository;
-import lombok.AllArgsConstructor;
+//import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @Service
 public class CategorieServiceImpl implements  CategoryService{
 
@@ -38,7 +38,7 @@ public class CategorieServiceImpl implements  CategoryService{
         try {
             List<Categorie> categoryExisting = this.repository.findAll();
             if (categoryExisting.isEmpty()){
-                throw new RuntimeException("Erreur du serveur");
+                throw new ProductNotFoundException("Erreur du serveur");
             }
             return categoryExisting;
         } catch (Exception e) {

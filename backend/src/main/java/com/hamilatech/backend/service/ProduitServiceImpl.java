@@ -212,4 +212,16 @@ public class ProduitServiceImpl implements ProduitService{
     }
 
 
+
+	@Override
+	public Optional<Produit> findByCategoryBy_IdCat(Long idCat) {
+		
+		return produitRepository.findById(idCat);
+	}
+
+
+
+	
+
+
 }

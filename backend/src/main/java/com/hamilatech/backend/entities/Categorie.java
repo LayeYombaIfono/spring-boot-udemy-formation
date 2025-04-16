@@ -2,7 +2,7 @@ package com.hamilatech.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+//import lombok.*;
 
 import java.util.List;
 

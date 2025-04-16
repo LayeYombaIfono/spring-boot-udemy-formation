@@ -4,6 +4,7 @@ import com.hamilatech.backend.entities.Categorie;
 import com.hamilatech.backend.entities.Produit;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProduitService {
 
@@ -25,5 +26,6 @@ public interface ProduitService {
     List<Produit> findByCategory(Categorie categorie);
     List<Produit> findByOrderByNomProduitAsc();
     List<Produit>trierProduitsNomPrix();
+    Optional<Produit> findByCategoryBy_IdCat(Long idCat);
 
 }
